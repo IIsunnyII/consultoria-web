@@ -249,6 +249,53 @@
     @media (width <= 600px) { border-radius: var(--radius-card-sm); }
   }
 
+  /* ---------- Movimiento al hacer scroll (src/scripts/motion.ts) ----------
+     Solo se ocultan si <html> tiene .motion (JS activo y sin reduced-motion). */
+  .motion [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity .9s var(--ease-out-soft) var(--rd, 0s),
+      transform 1.1s var(--ease-out-soft) var(--rd, 0s);
+  }
+  .motion [data-reveal].is-in { opacity: 1; transform: none; }
+
+  /* Titulares línea a línea: <h2 data-lines><span class="line"><span>…</span></span></h2> */
+  .line {
+    display: block;
+    overflow: clip;
+    /* margen negativo + padding: deja espacio a descendentes sin mover el layout */
+    margin: -.08em -.05em -.16em;
+    padding: .08em .05em .16em;
+  }
+  .line > span { display: block; }
+  .motion [data-lines] .line > span {
+    transform: translateY(110%);
+    transition: transform 1.1s var(--ease-out-soft);
+  }
+  .motion [data-lines] .line:nth-child(2) > span { transition-delay: .1s; }
+  .motion [data-lines] .line:nth-child(3) > span { transition-delay: .2s; }
+  .motion [data-lines].is-in .line > span { transform: none; }
+
+  /* Círculo que sigue al cursor */
+  .cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 120;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgb(255 255 255 / .2);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, rgb(255 255 255 / .125), transparent);
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+  @media (width <= 600px), (hover: none) { .cursor-glow { display: none; } }
+
   /* Enlace de texto con flecha: "Ver todos los proyectos →" */
   .text-link {
     display: inline-flex;

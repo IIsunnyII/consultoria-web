@@ -104,6 +104,21 @@ ni marca: todo el contenido es propio o placeholder.
   ancho del contenedor (ResizeObserver), tracking −0.085em. Fallback CSS: 27vw.
 - Barra inferior: © año + nombre, "Hecho en …" y "Volver arriba".
 
+## Movimiento (`src/scripts/motion.ts` + reglas en `global.css`)
+- Un script inline en `<head>` añade `.motion` a `<html>` antes del primer pintado, salvo con
+  `prefers-reduced-motion`. Sin esa clase nada se oculta: el contenido se ve siempre.
+- `[data-reveal]`: entra con opacidad 0 → 1 y 28 px → 0 (0.9 s / 1.1 s, `--ease-out-soft`).
+  Retraso opcional con `style="--rd:.15s"`.
+- `[data-lines]` en titulares: cada `<span class="line"><span>…</span></span>` sube desde su
+  máscara (110 % → 0), con 0.1 s entre líneas. La máscara usa margen negativo + padding para
+  no recortar descendentes ni mover el layout.
+- IntersectionObserver (umbral 0.15, margen inferior −8 %); cada elemento se anima una vez.
+- Círculo de cursor (30 px, borde 20 %, blur 1 px): sigue al puntero con interpolación en rAF,
+  crece ×1.6 sobre enlaces, botones y tarjetas, y se atenúa al quedarse quieto. Solo con
+  ratón; oculto en móvil y con reduced-motion.
+- Sin scroll suave por librería (Relay usa Lenis): se mantiene el scroll nativo por
+  accesibilidad y rendimiento.
+
 ## Fases
 0 base · 1 header · 2 hero · 3 proyectos (tarjetas apiladas sticky) · 4 stack · 5 footer ·
 6 movimiento · 8 rendimiento/a11y/SEO · 9 deploy. Un commit por fase.

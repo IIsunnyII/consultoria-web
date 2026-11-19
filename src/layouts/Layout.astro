@@ -21,6 +21,11 @@ const { title = `${site.name} — ${site.role}`, description = site.description 
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <!-- Activa las animaciones de entrada antes del primer pintado (sin parpadeo).
+         Con "reducir movimiento" no se activa y todo se ve desde el inicio. -->
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+    </script>
   </head>
   <body class="min-h-dvh">
     <a
@@ -30,5 +35,8 @@ const { title = `${site.name} — ${site.role}`, description = site.description 
       Saltar al contenido
     </a>
     <slot />
+    <script>
+      import '../scripts/motion';
+    </script>
   </body>
 </html>

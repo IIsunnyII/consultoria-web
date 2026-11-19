@@ -5,17 +5,17 @@ import { closing, site } from '../data/site';
 ---
 
 <section id="contacto" class="closing-cta section-y container-site" aria-labelledby="contacto-title">
-  <p class="eyebrow justify-center">{closing.eyebrow}</p>
-  <h2 id="contacto-title" class="closing-title">
-    <span class="block">{closing.title[0]}</span>
-    <span class="tone-chrome block">{closing.title[1]}</span>
+  <p class="eyebrow justify-center" data-reveal>{closing.eyebrow}</p>
+  <h2 id="contacto-title" class="closing-title" data-lines>
+    <span class="line"><span>{closing.title[0]}</span></span>
+    <span class="line"><span class="tone-chrome">{closing.title[1]}</span></span>
   </h2>
-  <p class="mx-auto mt-[30px] max-w-[500px] text-[18px] text-muted">{closing.text}</p>
-  <a href={closing.button.href} class="btn btn-primary mt-10">
+  <p class="mx-auto mt-[30px] max-w-[500px] text-[18px] text-muted" data-reveal style="--rd:.15s">{closing.text}</p>
+  <a href={closing.button.href} class="btn btn-primary mt-10" data-reveal style="--rd:.25s">
     {closing.button.label}
     <Icon name="arrow-right" />
   </a>
-  <a href={`mailto:${site.email}`} class="email-link">{site.email}</a>
+  <a href={`mailto:${site.email}`} class="email-link" data-reveal style="--rd:.32s">{site.email}</a>
 </section>
 
 <style>

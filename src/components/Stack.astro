@@ -7,18 +7,18 @@ import { moreTools, stackIntro, tools } from '../data/stack';
 
 <section id="stack" class="stack-section section-y container-site" aria-labelledby="stack-title">
   <div class="stack-intro">
-    <p class="eyebrow">{stackIntro.eyebrow}</p>
-    <h2 id="stack-title" class="stack-title">
-      <span class="block">{stackIntro.title[0]}</span>
-      <span class="tone-chrome block">{stackIntro.title[1]}</span>
+    <p class="eyebrow" data-reveal>{stackIntro.eyebrow}</p>
+    <h2 id="stack-title" class="stack-title" data-lines>
+      <span class="line"><span>{stackIntro.title[0]}</span></span>
+      <span class="line"><span class="tone-chrome">{stackIntro.title[1]}</span></span>
     </h2>
-    <p class="mt-7 max-w-[430px] text-muted">{stackIntro.text}</p>
-    <a href={stackIntro.link.href} class="text-link mt-8">
+    <p class="mt-7 max-w-[430px] text-muted" data-reveal style="--rd:.1s">{stackIntro.text}</p>
+    <a href={stackIntro.link.href} class="text-link mt-8" data-reveal style="--rd:.18s">
       {stackIntro.link.label}
       <Icon name="arrow-right" />
     </a>
 
-    <div class="mt-12">
+    <div class="mt-12" data-reveal style="--rd:.26s">
       <p class="label">También trabajamos con</p>
       <ul class="mt-4 flex flex-wrap gap-2">
         {moreTools.map((t) => <li class="chip">{t}</li>)}
@@ -27,8 +27,8 @@ import { moreTools, stackIntro, tools } from '../data/stack';
   </div>
 
   <ul class="tool-grid" data-spotlight-group>
-    {tools.map((tool) => (
-      <li class="tool-tile" data-spotlight>
+    {tools.map((tool, i) => (
+      <li class="tool-tile" data-spotlight data-reveal style={`--rd:${(i % 2) * 0.08 + Math.floor(i / 2) * 0.04}s`}>
         <span class="tool-mark" aria-hidden="true">{tool.mark}</span>
         <span class="tool-category">{tool.category}</span>
         <h3 class="tool-name">{tool.name}</h3>
@@ -83,7 +83,6 @@ import { moreTools, stackIntro, tools } from '../data/stack';
     border-radius: var(--radius-card);
     background: linear-gradient(rgb(255 255 255 / .06), rgb(255 255 255 / .02));
     box-shadow: var(--shadow-card);
-    transition: background-color .35s;
   }
   /* Borde degradado de 1px (máscara que deja solo el contorno) */
   .tool-tile::before {

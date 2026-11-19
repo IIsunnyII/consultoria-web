@@ -15,14 +15,14 @@ const { eyebrow, title, text, link, id } = Astro.props;
 
 <div class="split-heading">
   <div>
-    <p class="eyebrow">{eyebrow}</p>
-    <h2 id={id} class="text-heading">
-      <span class="block">{title[0]}</span>
-      <span class="tone-chrome block">{title[1]}</span>
+    <p class="eyebrow" data-reveal>{eyebrow}</p>
+    <h2 id={id} class="text-heading" data-lines>
+      <span class="line"><span>{title[0]}</span></span>
+      <span class="line"><span class="tone-chrome">{title[1]}</span></span>
     </h2>
   </div>
   {(text || link) && (
-    <div class="split-side">
+    <div class="split-side" data-reveal style="--rd:.15s">
       {text && <p class="text-muted">{text}</p>}
       {link && (
         <a href={link.href} class="text-link mt-7">
