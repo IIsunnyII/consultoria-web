@@ -16,7 +16,9 @@ export interface Project {
   tags: string[];
   repo?: string;       // URL del repositorio
   demo?: string;       // URL de la demo / build jugable
-  featured?: boolean;  // ocupa dos columnas en escritorio
+  featured?: boolean;  // aparece en el menú "Proyectos" del header
+  image?: string;      // ruta en /public, p. ej. '/images/proyecto.webp' (opcional)
+  category?: string;   // texto corto bajo el título, p. ej. 'Web · SaaS'
 }
 
 export const projects: Project[] = [
@@ -33,6 +35,7 @@ export const projects: Project[] = [
     repo: 'https://github.com/tu-usuario/proyecto-insignia',
     demo: 'https://proyecto-insignia.dev',
     featured: true,
+    category: 'Web · Plataforma',
   },
   {
     id: 'M-002',
@@ -46,11 +49,13 @@ export const projects: Project[] = [
     tags: ['Unity', 'C#', 'Blender'],
     repo: 'https://github.com/tu-usuario/juego-indie',
     demo: 'https://tu-usuario.itch.io/juego-indie',
+    featured: true,
+    category: 'Videojuego · Unity',
   },
   {
     id: 'M-003',
     title: 'API de Servicios',
-    codename: 'OPERATION_RELAY',
+    codename: 'OPERATION_BRIDGE',
     description:
       'API REST con .NET y Azure SQL: autenticación JWT, pruebas automatizadas y despliegue continuo.',
     status: 'DEPLOYED',
@@ -58,6 +63,8 @@ export const projects: Project[] = [
     year: '2025',
     tags: ['C#', '.NET', 'Azure SQL', 'CI/CD'],
     repo: 'https://github.com/tu-usuario/api-servicios',
+    featured: true,
+    category: 'Backend · API',
   },
   {
     id: 'M-004',

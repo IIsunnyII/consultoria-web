@@ -1,6 +1,7 @@
 ---
 // FASE 0 — Hoja de estilos viva. Se sustituye por las secciones reales en las fases 1-5.
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
 import { site } from '../data/site';
 
 const arrow = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>`;
@@ -19,11 +20,12 @@ const cards = [
 ---
 
 <Layout title={`Sistema de diseño — ${site.name}`}>
+  <Header />
   <main id="main">
     <!-- Hero de muestra -->
     <section class="grid min-h-[max(720px,100svh)] place-items-center px-5 pt-36 pb-24 text-center">
       <div class="flex flex-col items-center">
-        <p class="pill mb-7">Fase 0 · Sistema de diseño</p>
+        <p class="pill mb-7">Fase 1 · Header</p>
         <h1 class="text-display">
           <span class="block">Código con intención.</span>
           <span class="tone-chrome block">Juegos con alma.</span>

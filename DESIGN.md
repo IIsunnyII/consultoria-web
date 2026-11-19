@@ -48,6 +48,16 @@ ni marca: todo el contenido es propio o placeholder.
 - `.card`: degradado blanco al 6 % → 2 %, borde interior luminoso y sombra profunda.
 - `.arrow-circle`: círculo de 38 px con flecha que gira 45° y se invierte en hover de `.group`.
 
+## Header (`src/components/Header.astro`)
+- Píldora de vidrio fija: 1180 px máx, 60 px de alto, `top: 14px` (58 px y `100% - 24px` en móvil).
+- Nav centrada; los items con `menu` en `src/data/site.ts` abren un panel (Proyectos con 3
+  destacados de `projects.ts`, Lo que hago con los 6 servicios de `services.ts`).
+- Paneles: clic para abrir, uno a la vez; se cierran con Escape (devuelve el foco), clic fuera o
+  al elegir un enlace. Animación con `opacity` + `transform`, `inert` cuando están cerrados.
+- ≤ 1100 px: nav oculta, botón circular de 34 px que abre el menú móvil (bloquea el scroll).
+- El vidrio se vuelve más opaco tras 24 px de scroll (`.is-scrolled`).
+- Iconos de línea en `src/components/Icon.astro`.
+
 ## Fases
 0 base · 1 header · 2 hero · 3 proyectos (tarjetas apiladas sticky) · 4 stack · 5 footer ·
 6 movimiento · 8 rendimiento/a11y/SEO · 9 deploy. Un commit por fase.
