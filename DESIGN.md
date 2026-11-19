@@ -82,6 +82,17 @@ ni marca: todo el contenido es propio o placeholder.
 - Toda la tarjeta es un enlace (`.card-link`); "Repositorio" queda por encima como enlace aparte.
 - ≤ 850 px: sin sticky ni escalado, arte con `aspect-ratio` y panel debajo.
 
+## Stack (`src/components/Stack.astro`, datos en `src/data/stack.ts`)
+- Dos columnas 507fr / 686fr con separación de 6vw; el texto de la izquierda es sticky
+  (`top: 140px`). Titular de `clamp(36px, 3.5vw, 56px)`.
+- 8 tarjetas de vidrio en 2 columnas (16 px de separación): monograma de 44 px, categoría,
+  nombre de 24 px y una línea de descripción. No son enlaces, así que no llevan flecha.
+- Borde degradado de 1 px con máscara (`::before`) y foco de luz radial que sigue al cursor
+  (`::after` + `--mx`/`--my`, solo con ratón).
+- "También trabajamos con": etiquetas en píldora de `moreTools`.
+- ≤ 1100 px: una columna, intro no sticky. ≤ 600 px: tarjetas compactas en 2 columnas
+  (1 columna por debajo de 360 px).
+
 ## Fases
 0 base · 1 header · 2 hero · 3 proyectos (tarjetas apiladas sticky) · 4 stack · 5 footer ·
 6 movimiento · 8 rendimiento/a11y/SEO · 9 deploy. Un commit por fase.

@@ -1,0 +1,172 @@
+---
+// Stack técnico: texto a la izquierda (sticky) y grid de tarjetas de vidrio a la derecha.
+// Cada tarjeta tiene borde degradado y un foco de luz que sigue al cursor.
+import Icon from './Icon.astro';
+import { moreTools, stackIntro, tools } from '../data/stack';
+---
+
+<section id="stack" class="stack-section section-y container-site" aria-labelledby="stack-title">
+  <div class="stack-intro">
+    <p class="eyebrow">{stackIntro.eyebrow}</p>
+    <h2 id="stack-title" class="stack-title">
+      <span class="block">{stackIntro.title[0]}</span>
+      <span class="tone-chrome block">{stackIntro.title[1]}</span>
+    </h2>
+    <p class="mt-7 max-w-[430px] text-muted">{stackIntro.text}</p>
+    <a href={stackIntro.link.href} class="text-link mt-8">
+      {stackIntro.link.label}
+      <Icon name="arrow-right" />
+    </a>
+
+    <div class="mt-12">
+      <p class="label">También trabajamos con</p>
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {moreTools.map((t) => <li class="chip">{t}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <ul class="tool-grid" data-spotlight-group>
+    {tools.map((tool) => (
+      <li class="tool-tile" data-spotlight>
+        <span class="tool-mark" aria-hidden="true">{tool.mark}</span>
+        <span class="tool-category">{tool.category}</span>
+        <h3 class="tool-name">{tool.name}</h3>
+        <p class="tool-desc">{tool.description}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .stack-section {
+    display: grid;
+    grid-template-columns: minmax(0, 507fr) minmax(0, 686fr);
+    gap: 6vw;
+    align-items: start;
+  }
+  .stack-intro { position: sticky; top: 140px; }
+  .stack-title {
+    font-size: clamp(36px, 3.5vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+  }
+
+  .chip {
+    padding: 7px 13px;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+
+  /* ---------- Grid de tarjetas ---------- */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .tool-tile {
+    --mx: 50%;
+    --my: -40%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-areas:
+      "mark cat"
+      "name name"
+      "desc desc";
+    align-items: center;
+    gap: 0 12px;
+    padding: 24px;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: linear-gradient(rgb(255 255 255 / .06), rgb(255 255 255 / .02));
+    box-shadow: var(--shadow-card);
+    transition: background-color .35s;
+  }
+  /* Borde degradado de 1px (máscara que deja solo el contorno) */
+  .tool-tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgb(255 255 255 / .6), rgb(255 255 255 / .12) 26%, rgb(255 255 255 / .03) 55%, rgb(255 255 255 / .26));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity: .55;
+    pointer-events: none;
+  }
+  /* Foco de luz que sigue al cursor */
+  .tool-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(280px circle at var(--mx) var(--my), rgb(255 255 255 / .11), transparent 70%);
+    opacity: 0;
+    transition: opacity .35s;
+    pointer-events: none;
+  }
+  .tool-tile:hover::after { opacity: 1; }
+
+  .tool-mark {
+    grid-area: mark;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+    background: linear-gradient(rgb(255 255 255 / .08), rgb(255 255 255 / 0));
+  }
+  .tool-category { grid-area: cat; font-size: 10px; letter-spacing: .04em; color: var(--color-muted); }
+  .tool-name {
+    grid-area: name;
+    margin-top: 36px;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -.035em;
+  }
+  .tool-desc { grid-area: desc; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--color-muted); }
+
+  /* ---------- Responsive ---------- */
+  @media (width <= 1100px) {
+    .stack-section { grid-template-columns: 1fr; gap: 50px; }
+    .stack-intro { position: static; }
+    .stack-title { font-size: clamp(36px, 6vw, 56px); }
+  }
+  @media (width <= 600px) {
+    .tool-grid { gap: 10px; }
+    .tool-tile { grid-template-columns: 36px 1fr; gap: 0 8px; padding: 18px 15px; border-radius: var(--radius-card-sm); }
+    .tool-mark { width: 36px; height: 36px; border-radius: 10px; font-size: 12px; }
+    .tool-name { margin-top: 22px; font-size: 19px; }
+    .tool-desc { font-size: 13px; }
+  }
+  @media (width < 360px) {
+    .tool-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Foco de luz: actualiza --mx / --my con la posición del puntero dentro de cada tarjeta.
+  function initSpotlight() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach((tile) => {
+      if (tile.dataset.ready) return;
+      tile.dataset.ready = 'true';
+      tile.addEventListener('pointermove', (e) => {
+        const r = tile.getBoundingClientRect();
+        tile.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        tile.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+  }
+
+  initSpotlight();
+  document.addEventListener('astro:page-load', initSpotlight);
+</script>
