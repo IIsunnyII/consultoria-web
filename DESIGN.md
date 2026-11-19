@@ -93,6 +93,17 @@ ni marca: todo el contenido es propio o placeholder.
 - ≤ 1100 px: una columna, intro no sticky. ≤ 600 px: tarjetas compactas en 2 columnas
   (1 columna por debajo de 360 px).
 
+## CTA final y footer (`ClosingCta.astro`, `Footer.astro`, datos en `site.ts`)
+- CTA `#contacto` centrado: 140/150 px de padding (90 en móvil), titular de
+  `clamp(46px, 7.4vw, 106px)` (10.5vw en móvil), botón blanco a `mailto:` y email subrayado
+  en hover. Halo radial muy tenue detrás.
+- Footer: columnas 2fr/1fr/1fr (580/290/290 a 1440 px): frase en dos líneas, tagline,
+  disponibilidad con punto que late; "Explora" (usa `nav`) y "Hablemos" (`footer.contact` +
+  redes). En ≤ 850 px la intro ocupa toda la fila y las columnas quedan en 2.
+- Marca gigante `site.wordmark`: un script ajusta el tamaño de fuente para que ocupe todo el
+  ancho del contenedor (ResizeObserver), tracking −0.085em. Fallback CSS: 27vw.
+- Barra inferior: © año + nombre, "Hecho en …" y "Volver arriba".
+
 ## Fases
 0 base · 1 header · 2 hero · 3 proyectos (tarjetas apiladas sticky) · 4 stack · 5 footer ·
 6 movimiento · 8 rendimiento/a11y/SEO · 9 deploy. Un commit por fase.

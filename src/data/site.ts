@@ -12,6 +12,25 @@ export const site = {
   description:
     'Consultoría de desarrollo de software: web, backend, datos y videojuegos.',
   email: 'hola@tuestudio.dev',
+  wordmark: 'Estudio', // palabra gigante del footer (se ajusta al ancho; cuanto más corta, más grande)
+};
+
+// CTA final (sección #contacto)
+export const closing = {
+  eyebrow: 'Tu próximo proyecto empieza aquí',
+  title: ['Construyamos algo', 'que valga la pena.'] as [string, string],
+  text: 'Cuéntanos qué tienes en mente. Llevaremos buenas preguntas y una opinión honesta.',
+  button: { label: 'Escríbenos', href: `mailto:${site.email}?subject=Nuevo%20proyecto` },
+};
+
+// Footer
+export const footer = {
+  title: ['Software bien pensado.', 'Relaciones que duran.'] as [string, string],
+  availability: 'Disponibles para nuevos proyectos',
+  contact: [
+    { label: 'Iniciar un proyecto', href: `mailto:${site.email}?subject=Nuevo%20proyecto` },
+    { label: 'Escribir al estudio', href: `mailto:${site.email}` },
+  ],
 };
 
 // Textos del hero (pantalla inicial)

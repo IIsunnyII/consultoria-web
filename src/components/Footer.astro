@@ -1,0 +1,146 @@
+---
+// Footer: frase + disponibilidad, columnas de enlaces, marca gigante de borde a borde
+// y barra inferior. Datos en src/data/site.ts (site, nav, socials, footer).
+import Icon from './Icon.astro';
+import { footer, nav, site, socials } from '../data/site';
+
+const year = new Date().getFullYear();
+const social = socials.filter((s) => !s.href.startsWith('mailto:'));
+---
+
+<footer class="site-footer container-site">
+  <div class="footer-top">
+    <div class="footer-intro">
+      <h3 class="footer-title">
+        <span class="block">{footer.title[0]}</span>
+        <span class="block">{footer.title[1]}</span>
+      </h3>
+      <p class="mt-5 text-[13px] text-muted">{site.tagline}</p>
+      <p class="availability"><i aria-hidden="true"></i>{footer.availability}</p>
+    </div>
+
+    <nav class="footer-column" aria-label="Secciones">
+      <h4>Explora</h4>
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="footer-column">
+      <h4>Hablemos</h4>
+      {footer.contact.map((c) => <a href={c.href}>{c.label}</a>)}
+      {social.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener noreferrer">
+          {s.label}<Icon name="arrow-up-right" class="ml-1 inline size-3 align-[-1px]" />
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <a href="#inicio" class="footer-wordmark" aria-label={`${site.name}, volver al inicio`} data-fit-text>
+    <span data-fit-inner>{site.wordmark}</span>
+  </a>
+
+  <div class="footer-bottom">
+    <span>© {year} {site.name}</span>
+    <span>Hecho en {site.location}</span>
+    <a href="#inicio" class="ml-auto inline-flex items-center gap-2">
+      Volver arriba <Icon name="arrow-right" class="size-3.5 -rotate-90" />
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--color-line); }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    padding-top: 65px;
+  }
+  .footer-title {
+    font-size: clamp(28px, 2.3vw, 33px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -.045em;
+  }
+  .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+  .availability i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text);
+    box-shadow: 0 0 12px rgb(255 255 255 / .33);
+    animation: avail-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes avail-pulse { 50% { opacity: .35; } }
+
+  .footer-column { display: flex; flex-direction: column; align-items: flex-start; }
+  .footer-column h4 { margin-bottom: 8px; font-size: 14px; font-weight: 500; letter-spacing: 0; }
+  .footer-column a {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-muted);
+    transition: color .25s;
+  }
+  .footer-column a:hover { color: var(--color-text); }
+
+  /* Marca gigante: el script ajusta el tamaño para ocupar todo el ancho */
+  .footer-wordmark {
+    display: block;
+    margin-top: 20px;
+    font-size: 27vw;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -.085em;
+    white-space: nowrap;
+    color: var(--color-text);
+  }
+  .footer-wordmark span { display: inline-block; padding-right: .085em; }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+    padding-block: 25px 30px;
+    border-top: 1px solid var(--color-line);
+    font-size: 11px;
+    color: var(--color-muted);
+  }
+  .footer-bottom a { transition: color .25s; }
+  .footer-bottom a:hover { color: var(--color-text); }
+
+  @media (width <= 850px) {
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px 30px; padding-top: 50px; }
+    .footer-intro { grid-column: 1 / -1; }
+  }
+</style>
+
+<script>
+  // Ajusta el tamaño de fuente de [data-fit-text] para que su texto ocupe todo el ancho.
+  function initFitText() {
+    document.querySelectorAll<HTMLElement>('[data-fit-text]').forEach((el) => {
+      if (el.dataset.ready) return;
+      el.dataset.ready = 'true';
+      const inner = el.querySelector<HTMLElement>('[data-fit-inner]');
+      if (!inner) return;
+      const fit = () => {
+        el.style.fontSize = '100px';
+        const ratio = el.clientWidth / inner.getBoundingClientRect().width;
+        el.style.fontSize = `${Math.min(100 * ratio, 520)}px`;
+      };
+      document.fonts?.ready.then(fit);
+      fit();
+      new ResizeObserver(fit).observe(el);
+    });
+  }
+
+  initFitText();
+  document.addEventListener('astro:page-load', initFitText);
+</script>
