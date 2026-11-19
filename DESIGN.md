@@ -58,6 +58,17 @@ ni marca: todo el contenido es propio o placeholder.
 - El vidrio se vuelve más opaco tras 24 px de scroll (`.is-scrolled`).
 - Iconos de línea en `src/components/Icon.astro`.
 
+## Hero (`src/components/Hero.astro`)
+- Pantalla completa (`100svh`, mín. 760 px; en móvil `max(720px, 100svh)`), contenido centrado.
+- Textos en `src/data/site.ts` → `hero`. Titular con `text-display` (10.2vw en móvil); la 2.ª
+  línea usa `tone-chrome`.
+- Fondo: si `hero.image` tiene una ruta, se usa esa foto en blanco y negro al 40 % con blur de
+  1 px; si está vacío, una escena abstracta (luz cenital, suelo en perspectiva y grano).
+  Encima va siempre la viñeta que funde a negro.
+- Entrada escalonada con CSS (`.hero-in`, opacidad + 28 px, `--d` = retraso).
+- Parallax del fondo con el puntero (±1.2 %), solo con ratón y sin `prefers-reduced-motion`.
+- Indicador de scroll abajo a la izquierda con flecha que oscila.
+
 ## Fases
 0 base · 1 header · 2 hero · 3 proyectos (tarjetas apiladas sticky) · 4 stack · 5 footer ·
 6 movimiento · 8 rendimiento/a11y/SEO · 9 deploy. Un commit por fase.

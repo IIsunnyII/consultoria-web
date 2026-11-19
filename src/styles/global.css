@@ -112,6 +112,7 @@
   font-weight: 700;
   line-height: .96;
   letter-spacing: var(--tracking-display);
+  @media (width <= 600px) { font-size: 10.2vw; }
 }
 
 /* Titular de sección (h2) */

@@ -1,7 +1,8 @@
 ---
-// FASE 0 — Hoja de estilos viva. Se sustituye por las secciones reales en las fases 1-5.
+// Página principal. Las secciones de muestra bajo el hero se sustituyen en las fases 3-5.
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
 import { site } from '../data/site';
 
 const arrow = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>`;
@@ -19,30 +20,12 @@ const cards = [
 ];
 ---
 
-<Layout title={`Sistema de diseño — ${site.name}`}>
+<Layout title={`${site.name} — ${site.role}`}>
   <Header />
   <main id="main">
-    <!-- Hero de muestra -->
-    <section class="grid min-h-[max(720px,100svh)] place-items-center px-5 pt-36 pb-24 text-center">
-      <div class="flex flex-col items-center">
-        <p class="pill mb-7">Fase 1 · Header</p>
-        <h1 class="text-display">
-          <span class="block">Software con intención.</span>
-          <span class="tone-chrome block">Hecho por cuatro.</span>
-        </h1>
-        <p class="mt-8 max-w-[710px] text-lead text-muted">
-          {site.role}. Tokens, tipografía y componentes base listos para construir cada sección.
-        </p>
-        <div class="mt-10 flex flex-wrap justify-center gap-3">
-          <a href="#tokens" class="btn btn-primary">Ver tokens <Fragment set:html={arrow} /></a>
-          <a href="#componentes" class="btn btn-secondary">Componentes <Fragment set:html={arrow} /></a>
-        </div>
-        <ul class="label mt-10 flex flex-wrap justify-center gap-x-8 gap-y-2 !text-[10px]">
-          <li>✓ Monocromo</li><li>✓ Una sola fuente</li><li>✓ Movimiento suave</li>
-        </ul>
-      </div>
-    </section>
+    <Hero />
 
+    <!-- Muestra temporal del sistema (se sustituye en las fases 3-5) -->
     <!-- Tokens -->
     <section id="tokens" class="section-y">
       <div class="container-site">

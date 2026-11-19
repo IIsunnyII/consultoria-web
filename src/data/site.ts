@@ -14,6 +14,20 @@ export const site = {
   email: 'hola@tuestudio.dev',
 };
 
+// Textos del hero (pantalla inicial)
+export const hero = {
+  eyebrow: 'Ingeniería independiente. Criterio compartido.',
+  title: ['Software que se nota.', 'Hecho para durar.'], // 2.ª línea en gris metálico
+  lead:
+    'Cuatro ingenieros que diseñan, construyen y mantienen productos digitales. Web, plataformas, datos y videojuegos.',
+  primary: { label: 'Agendar una llamada', href: '#contacto' },
+  secondary: { label: 'Ver proyectos', href: '#proyectos' },
+  proof: ['Estrategia y código', 'Hecho a tu medida', 'Pensado para crecer'],
+  scrollCue: { label: 'Conoce nuestro trabajo', href: '#proyectos' },
+  // Foto de fondo opcional (se muestra en blanco y negro). Ej.: '/images/equipo.webp'
+  image: '' as string,
+};
+
 // `menu` abre un panel desplegable en escritorio ('projects' | 'services')
 export const nav: { href: string; label: string; menu?: 'projects' | 'services' }[] = [
   { href: '#proyectos', label: 'Proyectos', menu: 'projects' },
