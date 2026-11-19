@@ -12,8 +12,8 @@ const featured = projects.filter((p) => p.featured).slice(0, 3);
   <div class="header-glass" aria-hidden="true"></div>
 
   <!-- Logo -->
-  <a href="/" class="wordmark" aria-label={`${site.name}, inicio`}>
-    <span aria-hidden="true">{site.initials}</span>
+  <a href="/" class="wordmark">
+    {site.initials}<span class="sr-only"> · {site.name}, inicio</span>
   </a>
 
   <!-- Navegación de escritorio -->

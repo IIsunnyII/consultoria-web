@@ -51,9 +51,10 @@ export const hero = {
 export const nav: { href: string; label: string; menu?: 'projects' | 'services' }[] = [
   { href: '#proyectos', label: 'Proyectos', menu: 'projects' },
   { href: '#servicios', label: 'Servicios', menu: 'services' },
-  { href: '#proceso', label: 'Proceso' },
+  // Pendientes hasta que existan sus secciones (descomentar al crearlas):
+  // { href: '#proceso', label: 'Proceso' },
   { href: '#stack', label: 'Stack' },
-  { href: '#equipo', label: 'Equipo' },
+  // { href: '#equipo', label: 'Equipo' },
 ];
 
 export const socials = [

@@ -35,8 +35,8 @@ const social = socials.filter((s) => !s.href.startsWith('mailto:'));
     </div>
   </div>
 
-  <a href="#inicio" class="footer-wordmark" data-reveal aria-label={`${site.name}, volver al inicio`} data-fit-text>
-    <span data-fit-inner>{site.wordmark}</span>
+  <a href="#inicio" class="footer-wordmark" data-reveal data-fit-text>
+    <span data-fit-inner>{site.wordmark}</span><span class="sr-only"> · {site.name}, volver al inicio</span>
   </a>
 
   <div class="footer-bottom">

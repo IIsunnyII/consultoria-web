@@ -119,6 +119,27 @@ ni marca: todo el contenido es propio o placeholder.
 - Sin scroll suave por librería (Relay usa Lenis): se mantiene el scroll nativo por
   accesibilidad y rendimiento.
 
+## Servicios (`src/components/Services.astro`)
+- Grid 3×2 dentro de una sola `.card` con divisores de 1 px (2 columnas ≤ 1100 px, 1 ≤ 420 px).
+  Celdas de 230 px mín.: etiqueta, icono en círculo de 38 px (se invierte en hover), título y texto.
+- Usa `src/data/services.ts`, igual que el menú "Servicios" del header.
+
+## Rendimiento, accesibilidad y SEO
+- Lighthouse (móvil, build de producción): 100 / 100 / 100 / 100; FCP 0.8 s, LCP 1.2 s,
+  TBT 0 ms, CLS 0. Peso total del sitio ≈ 0.2 MB.
+- CSS incrustado en el HTML (`build.inlineStylesheets: 'always'`) y precarga de la fuente
+  latina de Rethink Sans.
+- `site` en `astro.config.mjs` (URL pública): genera canonical, Open Graph, sitemap
+  (`@astrojs/sitemap`) y `robots.txt` (`src/pages/robots.txt.ts`). **Cambiarla por el dominio real.**
+- Open Graph + Twitter Card con `public/og.png` (1200×630) y `apple-touch-icon.png`, generados con
+  `npm run imagenes` (`scripts/generar-imagenes.mjs`, lee `site.ts`).
+- JSON-LD `ProfessionalService` en `Layout.astro`.
+- `404.astro` con `noindex`.
+- Los enlaces con texto visible incluyen ese texto en su nombre accesible (logo y marca del
+  footer usan texto + `.sr-only`, no `aria-label`).
+- No debe haber anclas sin destino: "Proceso" y "Equipo" están comentados en `nav` hasta que
+  existan sus secciones.
+
 ## Fases
 0 base · 1 header · 2 hero · 3 proyectos (tarjetas apiladas sticky) · 4 stack · 5 footer ·
 6 movimiento · 8 rendimiento/a11y/SEO · 9 deploy. Un commit por fase.
