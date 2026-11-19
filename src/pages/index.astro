@@ -1,110 +1,16 @@
 ---
-// Página principal. Las secciones de muestra bajo el hero se sustituyen en las fases 3-5.
+// Página principal de la consultoría.
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
 import { site } from '../data/site';
-
-const arrow = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>`;
-const swatches = [
-  { name: 'bg', value: '#000000', cls: 'bg-bg' },
-  { name: 'surface', value: '#151515', cls: 'bg-surface' },
-  { name: 'subtle', value: '#66666C', cls: 'bg-subtle' },
-  { name: 'muted', value: '#B3B3B8', cls: 'bg-muted' },
-  { name: 'text', value: '#F5F5F5', cls: 'bg-text' },
-];
-const cards = [
-  { kicker: 'Web y producto', title: 'Experiencias web', text: 'Sitios y aplicaciones rápidas, accesibles y fáciles de mantener.' },
-  { kicker: 'Juegos', title: 'Desarrollo indie', text: 'Prototipos y juegos en Unity con sistemas que se sienten bien.' },
-  { kicker: 'Datos', title: 'Backends sólidos', text: 'APIs y bases de datos en Azure SQL pensadas para crecer.' },
-];
 ---
 
 <Layout title={`${site.name} — ${site.role}`}>
   <Header />
   <main id="main">
     <Hero />
-
-    <!-- Muestra temporal del sistema (se sustituye en las fases 3-5) -->
-    <!-- Tokens -->
-    <section id="tokens" class="section-y">
-      <div class="container-site">
-        <p class="eyebrow">Tokens</p>
-        <h2 class="text-heading">
-          Paleta en blanco y negro.
-          <span class="tone-2 block">Jerarquía con grises.</span>
-        </h2>
-        <ul class="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {swatches.map((s) => (
-            <li class="card overflow-hidden">
-              <div class:list={['h-28 border-b border-line', s.cls]}></div>
-              <div class="p-5">
-                <p class="text-title !text-lg">{s.name}</p>
-                <p class="label mt-1">{s.value}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <div class="card mt-6 grid gap-8 p-8 sm:p-10 lg:grid-cols-3">
-          <div>
-            <p class="label">Display · 700 · −0.055em</p>
-            <p class="text-display mt-3 !text-[clamp(48px,6vw,88px)]">Aa</p>
-          </div>
-          <div>
-            <p class="label">Heading · 600 · −0.045em</p>
-            <p class="text-heading mt-3 !text-[48px]">Titular</p>
-            <p class="label mt-6">Title · 24px</p>
-            <p class="text-title mt-2">Título de tarjeta</p>
-          </div>
-          <div>
-            <p class="label">Lead · 21px</p>
-            <p class="mt-2 text-lead text-muted">Párrafo destacado para introducciones.</p>
-            <p class="label mt-6">Body · 17px / 1.6</p>
-            <p class="mt-2 text-muted">Texto de cuerpo en Rethink Sans Variable, la única familia del sitio.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Componentes -->
-    <section id="componentes" class="section-y">
-      <div class="container-site">
-        <div class="grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-end">
-          <div>
-            <p class="eyebrow">Componentes base</p>
-            <h2 class="text-heading">
-              Piezas reutilizables.
-              <span class="tone-2 block">Mismo lenguaje.</span>
-            </h2>
-          </div>
-          <p class="text-muted">
-            Tarjetas con radio de 26px, borde interior luminoso y una sombra profunda. Pasa el
-            cursor para ver la flecha girar.
-          </p>
-        </div>
-
-        <ul class="card mt-14 grid overflow-hidden md:grid-cols-3">
-          {cards.map((c) => (
-            <li class="group flex min-h-[230px] flex-col border-b border-line px-8 pt-7 pb-8 last:border-b-0 md:border-r md:border-b-0 md:last:border-r-0">
-              <div class="flex items-start justify-between gap-4">
-                <span class="label">{c.kicker}</span>
-                <span class="arrow-circle" aria-hidden="true">
-                  <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 11 11 5M6 5h5v5"/></svg>
-                </span>
-              </div>
-              <h3 class="text-title mt-auto pt-10">{c.title}</h3>
-              <p class="mt-2 text-[15px] leading-relaxed text-muted">{c.text}</p>
-            </li>
-          ))}
-        </ul>
-
-        <div class="mt-10 flex flex-wrap items-center gap-3">
-          <a href="#main" class="btn btn-primary">Botón primario <Fragment set:html={arrow} /></a>
-          <a href="#main" class="btn btn-secondary">Botón secundario <Fragment set:html={arrow} /></a>
-          <span class="pill">Etiqueta en píldora</span>
-        </div>
-      </div>
-    </section>
+    <Projects />
   </main>
 </Layout>

@@ -1,80 +1,96 @@
 // =========================================================
-// MISIONES (PROYECTOS) — placeholders editables
-// Añade, quita o reordena objetos; la sección se genera sola.
+// PROYECTOS — placeholders editables
+// Cada proyecto se muestra como una tarjeta grande que se apila al hacer scroll.
+// Si no hay `image`, la tarjeta dibuja una vista previa del sitio con `preview`.
 // =========================================================
 
-export type MissionStatus = 'DEPLOYED' | 'IN_PROGRESS' | 'CLASSIFIED' | 'ARCHIVED';
+export type ProjectStatus = 'Lanzado' | 'En desarrollo' | 'Confidencial';
+export type PreviewTone = 'bone' | 'graphite' | 'steel';
 
 export interface Project {
-  id: string;          // código de misión, p. ej. 'M-001'
-  title: string;
-  codename?: string;   // subtítulo táctico
-  description: string;
-  status: MissionStatus;
-  version: string;
+  slug: string;
+  title: string;          // nombre del proyecto o cliente
+  category: string;       // texto corto, p. ej. 'Logística · Plataforma web'
+  summary: string;        // una frase sobre el proyecto
+  tags: string[];         // servicios o tecnologías
   year: string;
-  tags: string[];
-  repo?: string;       // URL del repositorio
-  demo?: string;       // URL de la demo / build jugable
-  featured?: boolean;  // aparece en el menú "Proyectos" del header
-  image?: string;      // ruta en /public, p. ej. '/images/proyecto.webp' (opcional)
-  category?: string;   // texto corto bajo el título, p. ej. 'Web · SaaS'
+  status: ProjectStatus;
+  demo?: string;          // enlace principal (sitio, demo o build jugable)
+  repo?: string;          // repositorio público (opcional)
+  featured?: boolean;     // aparece en el menú "Proyectos" del header
+  image?: string;         // captura real en /public, p. ej. '/images/norte.webp'
+  // Vista previa dibujada cuando no hay imagen
+  preview: {
+    tone: PreviewTone;
+    brand: string;        // logotipo de texto dentro de la vista previa
+    nav: [string, string, string];
+    kicker: string;
+    headline: [string, string];
+    pill: string;
+    caption: string;
+  };
 }
 
 export const projects: Project[] = [
   {
-    id: 'M-001',
-    title: 'Proyecto Insignia',
-    codename: 'OPERATION_IRONCLAD',
-    description:
-      'Plataforma web full-stack con panel de control en tiempo real, autenticación y reportes. Sustituye este texto por el resumen de tu proyecto principal.',
-    status: 'DEPLOYED',
-    version: 'v2.3.0',
+    slug: 'norte',
+    title: 'Norte',
+    category: 'Logística · Plataforma web',
+    summary: 'Panel de seguimiento de envíos en tiempo real para una red de distribución regional.',
+    tags: ['Astro', 'TypeScript', 'Azure SQL'],
     year: '2026',
-    tags: ['Astro', 'TypeScript', 'Azure SQL', 'Tailwind'],
-    repo: 'https://github.com/tu-usuario/proyecto-insignia',
-    demo: 'https://proyecto-insignia.dev',
+    status: 'Lanzado',
+    demo: 'https://norte.example.com',
+    repo: 'https://github.com/tu-estudio/norte',
     featured: true,
-    category: 'Web · Plataforma',
+    preview: {
+      tone: 'bone',
+      brand: 'norte',
+      nav: ['Envíos', 'Rutas', 'Soporte'],
+      kicker: 'Logística sin fricción.',
+      headline: ['Cada envío.', 'A tiempo.'],
+      pill: 'Rastrear un pedido',
+      caption: 'Visibilidad completa, de la bodega a la puerta.',
+    },
   },
   {
-    id: 'M-002',
-    title: 'Juego Indie',
-    codename: 'OPERATION_EMBER',
-    description:
-      'Videojuego de acción táctica en desarrollo con Unity. Sistemas de IA enemiga, guardado y HUD diegético.',
-    status: 'IN_PROGRESS',
-    version: 'v0.8.2-BETA',
-    year: '2026',
-    tags: ['Unity', 'C#', 'Blender'],
-    repo: 'https://github.com/tu-usuario/juego-indie',
-    demo: 'https://tu-usuario.itch.io/juego-indie',
-    featured: true,
+    slug: 'kairo',
+    title: 'Kairo',
     category: 'Videojuego · Unity',
-  },
-  {
-    id: 'M-003',
-    title: 'API de Servicios',
-    codename: 'OPERATION_BRIDGE',
-    description:
-      'API REST con .NET y Azure SQL: autenticación JWT, pruebas automatizadas y despliegue continuo.',
-    status: 'DEPLOYED',
-    version: 'v1.4.1',
-    year: '2025',
-    tags: ['C#', '.NET', 'Azure SQL', 'CI/CD'],
-    repo: 'https://github.com/tu-usuario/api-servicios',
+    summary: 'Roguelike táctico por turnos con generación procedural de niveles y guardado en la nube.',
+    tags: ['Unity', 'C#', 'Diseño de juego'],
+    year: '2026',
+    status: 'En desarrollo',
+    demo: 'https://tu-estudio.itch.io/kairo',
     featured: true,
-    category: 'Backend · API',
+    preview: {
+      tone: 'graphite',
+      brand: 'KAIRO',
+      nav: ['El juego', 'Diario', 'Comunidad'],
+      kicker: 'Un roguelike táctico.',
+      headline: ['Cae. Aprende.', 'Vuelve.'],
+      pill: 'Jugar la demo',
+      caption: 'Cada partida cuenta una historia distinta.',
+    },
   },
   {
-    id: 'M-004',
-    title: 'Herramienta Interna',
-    codename: 'OPERATION_GHOST',
-    description:
-      'Proyecto bajo acuerdo de confidencialidad. Describe el problema resuelto y el impacto sin revelar detalles sensibles.',
-    status: 'CLASSIFIED',
-    version: 'v1.0.0',
+    slug: 'vera',
+    title: 'Clínica Vera',
+    category: 'Salud · Sistema de citas',
+    summary: 'Agenda en línea, expedientes y recordatorios automáticos para una clínica con tres sedes.',
+    tags: ['.NET', 'Azure SQL', 'API REST'],
     year: '2025',
-    tags: ['TypeScript', 'Node.js'],
+    status: 'Lanzado',
+    demo: 'https://vera.example.com',
+    featured: true,
+    preview: {
+      tone: 'steel',
+      brand: 'vera',
+      nav: ['Servicios', 'Sedes', 'Agenda'],
+      kicker: 'Salud, bien organizada.',
+      headline: ['Menos espera.', 'Más cuidado.'],
+      pill: 'Agendar una cita',
+      caption: 'Tu consulta, a dos clics de distancia.',
+    },
   },
 ];

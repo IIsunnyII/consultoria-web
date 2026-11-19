@@ -249,6 +249,18 @@
     @media (width <= 600px) { border-radius: var(--radius-card-sm); }
   }
 
+  /* Enlace de texto con flecha: "Ver todos los proyectos →" */
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .text-link svg { width: 18px; height: 18px; transition: transform .4s var(--ease-out-soft); }
+  .text-link:hover svg { transform: translateX(4px); }
+
   /* Botón circular con flecha diagonal (esquina de tarjetas) */
   .arrow-circle {
     display: grid;

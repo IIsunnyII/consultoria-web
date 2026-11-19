@@ -1,0 +1,50 @@
+---
+// Encabezado de sección dividido: eyebrow + titular en dos tonos a la izquierda,
+// texto y enlace opcional a la derecha (alineados abajo).
+import Icon from './Icon.astro';
+
+interface Props {
+  eyebrow: string;
+  title: [string, string];   // 2.ª línea en gris metálico
+  text?: string;
+  link?: { label: string; href: string };
+  id?: string;               // id del h2 para aria-labelledby
+}
+const { eyebrow, title, text, link, id } = Astro.props;
+---
+
+<div class="split-heading">
+  <div>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id={id} class="text-heading">
+      <span class="block">{title[0]}</span>
+      <span class="tone-chrome block">{title[1]}</span>
+    </h2>
+  </div>
+  {(text || link) && (
+    <div class="split-side">
+      {text && <p class="text-muted">{text}</p>}
+      {link && (
+        <a href={link.href} class="text-link mt-7">
+          {link.label}
+          <Icon name="arrow-right" />
+        </a>
+      )}
+    </div>
+  )}
+</div>
+
+<style>
+  .split-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 70px;
+    margin-bottom: 65px;
+  }
+  .split-side { flex: 0 0 330px; padding-bottom: 6px; }
+  @media (width <= 850px) {
+    .split-heading { flex-direction: column; align-items: flex-start; gap: 35px; margin-bottom: 35px; }
+    .split-side { flex-basis: auto; }
+  }
+</style>

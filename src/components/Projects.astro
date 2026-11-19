@@ -1,0 +1,63 @@
+---
+// Sección de proyectos: encabezado dividido + tarjetas sticky que se apilan al hacer scroll.
+import ProjectCard from './ProjectCard.astro';
+import SplitHeading from './SplitHeading.astro';
+import { projects } from '../data/projects';
+---
+
+<section id="proyectos" class="section-y container-site" aria-labelledby="proyectos-title">
+  <SplitHeading
+    id="proyectos-title"
+    eyebrow="Proyectos seleccionados"
+    title={['Problemas distintos.', 'El mismo estándar.']}
+    text="Algunos trabajos recientes. Pensados con cuidado, construidos con rigor y listos para crecer."
+    link={{ label: 'Hablemos de tu proyecto', href: '#contacto' }}
+  />
+
+  <div class="project-stack" data-project-stack>
+    {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+  </div>
+</section>
+
+<script>
+  // Efecto de apilado: cuando la tarjeta siguiente sube y cubre la actual,
+  // la actual se reduce (scale) y se oscurece (--shade). Solo transform/opacity.
+  function initProjectStack() {
+    const stack = document.querySelector<HTMLElement>('[data-project-stack]');
+    if (!stack || stack.dataset.ready) return;
+    stack.dataset.ready = 'true';
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const desktop = window.matchMedia('(width > 850px)');
+    const cards = [...stack.querySelectorAll<HTMLElement>('[data-stack-card]')];
+    const inners = cards.map((c) => c.querySelector<HTMLElement>('[data-stack-inner]')!);
+    let raf = 0;
+
+    const reset = () => inners.forEach((el) => { el.style.transform = ''; el.style.setProperty('--shade', '0'); });
+
+    const update = () => {
+      raf = 0;
+      if (!desktop.matches || reduced.matches) return reset();
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        if (!next) return;
+        const stickyTop = parseFloat(getComputedStyle(card).top) || 0;
+        const h = card.offsetHeight;
+        const covered = 1 - (next.getBoundingClientRect().top - stickyTop) / h; // 0 → 1
+        const p = Math.min(Math.max(covered, 0), 1);
+        inners[i].style.transform = `scale(${(1 - p * 0.06).toFixed(4)}) translateY(${(-p * 14).toFixed(2)}px)`;
+        inners[i].style.setProperty('--shade', p.toFixed(3));
+      });
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    desktop.addEventListener('change', onScroll);
+    reduced.addEventListener('change', onScroll);
+  }
+
+  initProjectStack();
+  document.addEventListener('astro:page-load', initProjectStack);
+</script>

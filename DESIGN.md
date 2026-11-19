@@ -69,6 +69,19 @@ ni marca: todo el contenido es propio o placeholder.
 - Parallax del fondo con el puntero (±1.2 %), solo con ratón y sin `prefers-reduced-motion`.
 - Indicador de scroll abajo a la izquierda con flecha que oscila.
 
+## Proyectos (`Projects.astro`, `ProjectCard.astro`, `SplitHeading.astro`)
+- `SplitHeading`: eyebrow + titular en dos tonos a la izquierda; texto y `.text-link` a la
+  derecha, alineados abajo (en columna ≤ 850 px).
+- Tarjetas de 750 px de alto (máx. `100svh - 140px`), radio 32 px, `position: sticky; top: 110px`
+  y 85 px de separación. Al cubrirse, la anterior se escala hasta 0.94, sube 14 px y se
+  oscurece (`--shade`); calculado en `requestAnimationFrame`, solo transform/opacity.
+- Arte: captura `image` o vista previa dibujada en CSS (`preview` en `projects.ts`, tonos
+  `bone`, `graphite`, `steel`). Su tipografía escala con unidades `cqi` del contenedor.
+- Panel de vidrio abajo a la izquierda (categoría, título 46 px, estado · año y tags) y
+  círculo con flecha arriba a la derecha que gira en hover.
+- Toda la tarjeta es un enlace (`.card-link`); "Repositorio" queda por encima como enlace aparte.
+- ≤ 850 px: sin sticky ni escalado, arte con `aspect-ratio` y panel debajo.
+
 ## Fases
 0 base · 1 header · 2 hero · 3 proyectos (tarjetas apiladas sticky) · 4 stack · 5 footer ·
 6 movimiento · 8 rendimiento/a11y/SEO · 9 deploy. Un commit por fase.
