@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # capturas de referencia (no publicar)
 referencia/
+
+# configuración local del editor/asistente (no publicar)
+.claude/

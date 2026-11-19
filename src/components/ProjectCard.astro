@@ -3,6 +3,7 @@
 // Muestra la captura `image` o, si no hay, una vista previa dibujada con CSS.
 import Icon from './Icon.astro';
 import type { Project } from '../data/projects';
+import { withBase } from '../utils/url';
 
 interface Props {
   project: Project;
@@ -27,7 +28,7 @@ const external = href.startsWith('http');
     ></a>
     <div class="project-art">
       {project.image ? (
-        <img class="project-img" src={project.image} alt="" width="1280" height="750" loading="lazy" decoding="async" />
+        <img class="project-img" src={withBase(project.image)} alt="" width="1280" height="750" loading="lazy" decoding="async" />
       ) : (
         <div class:list={['project-preview', `tone-${preview.tone}`]} aria-hidden="true">
           <div class="preview-deco"></div>

@@ -4,6 +4,7 @@ import '../styles/global.css';
 // Fuente principal (subconjunto latino): se precarga para evitar el salto al cambiar de fuente
 import fontLatin from '@fontsource-variable/rethink-sans/files/rethink-sans-latin-wght-normal.woff2?url';
 import { site, socials } from '../data/site';
+import { withBase } from '../utils/url';
 
 interface Props {
   title?: string;
@@ -20,7 +21,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(image, Astro.site);
+const ogImage = new URL(withBase(image), Astro.site);
 
 // Datos estructurados (schema.org) para buscadores
 const jsonLd = {
@@ -28,7 +29,7 @@ const jsonLd = {
   '@type': 'ProfessionalService',
   name: site.name,
   description: site.description,
-  url: Astro.site?.href,
+  url: new URL(withBase('/'), Astro.site).href,
   email: site.email,
   image: ogImage.href,
   areaServed: 'Worldwide',
@@ -51,9 +52,9 @@ const jsonLd = {
     <meta name="color-scheme" content="dark" />
     <meta name="generator" content={Astro.generator} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+    <link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} />
+    <link rel="sitemap" href={withBase("/sitemap-index.xml")} />
     <link rel="preload" href={fontLatin} as="font" type="font/woff2" crossorigin />
 
     <!-- Open Graph / redes sociales -->

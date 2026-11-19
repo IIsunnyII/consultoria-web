@@ -3,6 +3,7 @@
 // dos CTA, tres garantías y un indicador de scroll. Textos en src/data/site.ts → hero.
 import Icon from './Icon.astro';
 import { hero } from '../data/site';
+import { withBase } from '../utils/url';
 
 // Ruido de grano (SVG inline) para dar textura fotográfica al fondo
 const grain = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
@@ -13,7 +14,7 @@ const grain = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'
   <div class="hero-backdrop" aria-hidden="true">
     <div class="hero-scene" data-hero-parallax>
       {hero.image ? (
-        <img src={hero.image} alt="" width="1920" height="1080" fetchpriority="high" decoding="async" />
+        <img src={withBase(hero.image)} alt="" width="1920" height="1080" fetchpriority="high" decoding="async" />
       ) : (
         <>
           <div class="scene-light"></div>

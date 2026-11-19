@@ -3,6 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
+import { withBase } from '../utils/url';
 ---
 
 <Layout title={`Página no encontrada — ${site.name}`} noindex>
@@ -16,7 +17,7 @@ import { site } from '../data/site';
       <p class="mt-8 max-w-[480px] text-lead text-muted max-sm:text-[17px]">
         La página que buscas no existe o cambió de lugar.
       </p>
-      <a href="/" class="btn btn-primary mt-10">Volver al inicio <Icon name="arrow-right" /></a>
+      <a href={withBase("/")} class="btn btn-primary mt-10">Volver al inicio <Icon name="arrow-right" /></a>
     </div>
   </main>
 </Layout>

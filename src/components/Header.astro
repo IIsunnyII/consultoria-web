@@ -4,6 +4,7 @@ import Icon from './Icon.astro';
 import { nav, site } from '../data/site';
 import { projects } from '../data/projects';
 import { services } from '../data/services';
+import { withBase } from '../utils/url';
 
 const featured = projects.filter((p) => p.featured).slice(0, 3);
 ---
@@ -12,7 +13,7 @@ const featured = projects.filter((p) => p.featured).slice(0, 3);
   <div class="header-glass" aria-hidden="true"></div>
 
   <!-- Logo -->
-  <a href="/" class="wordmark">
+  <a href={withBase("/")} class="wordmark">
     {site.initials}<span class="sr-only"> · {site.name}, inicio</span>
   </a>
 
@@ -63,7 +64,7 @@ const featured = projects.filter((p) => p.featured).slice(0, 3);
         <a href="#proyectos" class="mega-project group">
           <div class="mega-thumb">
             {p.image ? (
-              <img src={p.image} alt="" width="480" height="300" loading="lazy" decoding="async" />
+              <img src={withBase(p.image)} alt="" width="480" height="300" loading="lazy" decoding="async" />
             ) : (
               <span class="mega-thumb-fallback" aria-hidden="true">{p.title}</span>
             )}
