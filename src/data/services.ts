@@ -1,5 +1,5 @@
 // =========================================================
-// LO QUE HAGO — se usa en el menú del header y en la sección de servicios
+// SERVICIOS — se usa en el menú del header y en la sección de servicios
 // icon: nombre de uno de los iconos de src/components/Icon.astro
 // =========================================================
 

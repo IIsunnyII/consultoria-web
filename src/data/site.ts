@@ -3,29 +3,29 @@
 // =========================================================
 
 export const site = {
-  name: 'Tu Nombre',
-  initials: 'TN', // monograma del logo
-  role: 'Software Engineer / Indie Game Dev',
+  name: 'Nombre del Estudio', // nombre provisional de la consultoría
+  initials: 'NE', // monograma del logo
+  role: 'Consultoría de software',
   location: 'México',
-  tagline: 'Desde México. Trabajo en remoto con todo el mundo.',
-  cta: { label: 'Hablemos', href: '#contacto' },
+  tagline: 'Cuatro socios desde México. Trabajamos en remoto con todo el mundo.',
+  cta: { label: 'Agendar llamada', href: '#contacto' },
   description:
-    'Portafolio de ingeniería de software y desarrollo de videojuegos independientes.',
-  email: 'hola@tudominio.dev',
+    'Consultoría de desarrollo de software: web, backend, datos y videojuegos.',
+  email: 'hola@tuestudio.dev',
 };
 
 // `menu` abre un panel desplegable en escritorio ('projects' | 'services')
 export const nav: { href: string; label: string; menu?: 'projects' | 'services' }[] = [
   { href: '#proyectos', label: 'Proyectos', menu: 'projects' },
-  { href: '#servicios', label: 'Lo que hago', menu: 'services' },
+  { href: '#servicios', label: 'Servicios', menu: 'services' },
   { href: '#proceso', label: 'Proceso' },
   { href: '#stack', label: 'Stack' },
-  { href: '#sobre-mi', label: 'Sobre mí' },
+  { href: '#equipo', label: 'Equipo' },
 ];
 
 export const socials = [
-  { label: 'GitHub', href: 'https://github.com/tu-usuario' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/tu-usuario' },
-  { label: 'itch.io', href: 'https://tu-usuario.itch.io' },
+  { label: 'GitHub', href: 'https://github.com/tu-estudio' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/tu-estudio' },
+  { label: 'Instagram', href: 'https://www.instagram.com/tu-estudio' },
   { label: 'Email', href: `mailto:${site.email}` },
 ];

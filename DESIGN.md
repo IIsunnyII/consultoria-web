@@ -1,6 +1,6 @@
 # Sistema de diseño
 
-Portafolio personal (Astro 7 + Tailwind CSS v4). El estilo visual, el layout y las interacciones
+Sitio de la consultoría de software (Astro 7 + Tailwind CSS v4). El estilo visual, el layout y las interacciones
 se inspiran en la plantilla Relay (relay-theme.pages.dev). **No** se usan su logo, textos, fotos
 ni marca: todo el contenido es propio o placeholder.
 
@@ -51,7 +51,7 @@ ni marca: todo el contenido es propio o placeholder.
 ## Header (`src/components/Header.astro`)
 - Píldora de vidrio fija: 1180 px máx, 60 px de alto, `top: 14px` (58 px y `100% - 24px` en móvil).
 - Nav centrada; los items con `menu` en `src/data/site.ts` abren un panel (Proyectos con 3
-  destacados de `projects.ts`, Lo que hago con los 6 servicios de `services.ts`).
+  destacados de `projects.ts`, Servicios con los 6 servicios de `services.ts`).
 - Paneles: clic para abrir, uno a la vez; se cierran con Escape (devuelve el foco), clic fuera o
   al elegir un enlace. Animación con `opacity` + `transform`, `inert` cuando están cerrados.
 - ≤ 1100 px: nav oculta, botón circular de 34 px que abre el menú móvil (bloquea el scroll).
