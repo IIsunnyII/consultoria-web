@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+/* =========================================================
+   TOKENS — sistema monocromo (ver DESIGN.md)
+   Medidas tomadas de la referencia a 1440px.
+   ========================================================= */
+@theme {
+  /* Color: negro puro, texto casi blanco, grises para jerarquía */
+  --color-bg: #000;
+  --color-surface: #151515;
+  --color-text: #f5f5f5;
+  --color-muted: #b3b3b8;   /* párrafos, eyebrows */
+  --color-subtle: #66666c;  /* segunda línea de titulares */
+  --color-ink: #0b0b0b;     /* texto sobre botón blanco */
+  --color-line: rgb(255 255 255 / .16);
+  --color-line-soft: rgb(255 255 255 / .08);
+
+  /* Una sola familia */
+  --font-sans: "Rethink Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Escala tipográfica */
+  --text-body: 17px;
+  --text-body--line-height: 1.6;
+  --text-lead: 21px;
+  --text-lead--line-height: 1.55;
+
+  /* Tracking negativo de titulares */
+  --tracking-display: -.055em;
+  --tracking-heading: -.045em;
+  --tracking-title: -.035em;
+
+  /* Radios */
+  --radius-card: 26px;
+  --radius-card-sm: 20px;
+
+  /* Curva de movimiento */
+  --ease-out-soft: cubic-bezier(.22, 1, .36, 1);
+
+  /* Sombra de tarjeta (borde interior luminoso + caída profunda) */
+  --shadow-card:
+    inset 0 1px 0 rgb(255 255 255 / .16),
+    inset 0 -1px 0 rgb(255 255 255 / .03),
+    0 1px 1px rgb(0 0 0 / .4),
+    0 24px 60px -18px rgb(0 0 0 / .73);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+@layer base {
+  :root {
+    color-scheme: dark;
+    font-synthesis: none;
+    --gutter: 48px; /* márgenes del contenedor: 48 / 32 / 20 px */
+  }
+  @media (width <= 1100px) { :root { --gutter: 32px; } }
+  @media (width <= 600px)  { :root { --gutter: 20px; } }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    @apply bg-bg font-sans text-body text-text antialiased;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection { background: var(--color-text); color: var(--color-bg); }
+
+  :focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* =========================================================
+   UTILIDADES DE LAYOUT Y TIPOGRAFÍA
+   ========================================================= */
+
+/* Contenedor: min(1280px, 100% - márgenes) */
+@utility container-site {
+  width: min(1280px, 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+/* Ritmo vertical de sección: 90 / 85 / 65 px */
+@utility section-y {
+  padding-block: 90px;
+  @media (width <= 850px) { padding-block: 85px; }
+  @media (width <= 600px) { padding-block: 65px; }
+}
+
+/* Titular del hero */
+@utility text-display {
+  font-size: clamp(54px, min(10.6vw, 17vh), 176px);
+  font-weight: 700;
+  line-height: .96;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Titular de sección (h2) */
+@utility text-heading {
+  font-size: clamp(40px, 6vw, 86px);
+  font-weight: 600;
+  line-height: .98;
+  letter-spacing: var(--tracking-heading);
+  @media (width <= 600px) { letter-spacing: -.05em; }
+}
+
+/* Título de tarjeta (h3) */
+@utility text-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: var(--tracking-title);
+}
+
+/* Segunda línea gris de un titular en dos tonos */
+@utility tone-2 {
+  color: var(--color-subtle);
+}
+
+/* Variante metálica (degradado vertical) para el hero */
+@utility tone-chrome {
+  color: transparent;
+  background: linear-gradient(#ededf1, #929299);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Etiqueta pequeña en mayúsculas */
+@utility label {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* =========================================================
+   COMPONENTES BASE
+   ========================================================= */
+@layer components {
+  /* Eyebrow con punto luminoso: "• Proyectos seleccionados" */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    font-size: 13px;
+    letter-spacing: .045em;
+    color: var(--color-muted);
+  }
+  .eyebrow::before {
+    content: "";
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-text);
+    box-shadow: 0 0 12px rgb(255 255 255 / .5);
+  }
+
+  /* Etiqueta en píldora (la del hero) */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 15px;
+    border: 1px solid rgb(255 255 255 / .18);
+    border-radius: 999px;
+    background: rgb(0 0 0 / .25);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    @media (width <= 600px) { gap: 7px; padding: 9px 12px; font-size: 8.5px; letter-spacing: .09em; }
+  }
+  .pill::before {
+    content: "";
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--color-text);
+    box-shadow: 0 0 10px rgb(255 255 255 / .6);
+  }
+
+  /* Botones en píldora con flecha */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 17px 23px 17px 27px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+    transition:
+      box-shadow .4s var(--ease-out-soft),
+      transform .4s var(--ease-out-soft),
+      background-color .3s, border-color .3s;
+  }
+  .btn svg { width: 20px; height: 20px; transition: transform .4s var(--ease-out-soft); }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn:active { transform: scale(.98); }
+
+  .btn-primary {
+    background: linear-gradient(#fff, var(--color-text));
+    color: var(--color-ink);
+    box-shadow: 0 9px 26px rgb(255 255 255 / .14), inset 0 1px 0 #fff;
+  }
+  .btn-primary:hover { box-shadow: 0 12px 34px rgb(255 255 255 / .22), inset 0 1px 0 #fff; }
+
+  .btn-secondary {
+    background: rgb(255 255 255 / .035);
+    border-color: rgb(255 255 255 / .19);
+    color: var(--color-text);
+  }
+  .btn-secondary:hover { background: rgb(255 255 255 / .07); border-color: rgb(255 255 255 / .3); }
+
+  @media (width <= 600px) {
+    .btn { gap: 18px; padding: 15px 20px 15px 24px; font-size: 15px; }
+    .btn svg { width: 17px; height: 17px; }
+  }
+
+  /* Tarjeta: degradado apenas más claro que el negro + borde interior */
+  .card {
+    border-radius: var(--radius-card);
+    background: linear-gradient(rgb(255 255 255 / .06), rgb(255 255 255 / .02));
+    box-shadow: var(--shadow-card);
+    @media (width <= 600px) { border-radius: var(--radius-card-sm); }
+  }
+
+  /* Botón circular con flecha diagonal (esquina de tarjetas) */
+  .arrow-circle {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    transition: background-color .4s var(--ease-out-soft), color .4s, transform .4s var(--ease-out-soft);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .arrow-circle {
+      background: var(--color-text);
+      color: var(--color-bg);
+      transform: rotate(45deg);
+    }
+  }
+}
